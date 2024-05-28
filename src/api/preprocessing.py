@@ -45,7 +45,7 @@ class Preprocessor():
                 dx = right_eye[0] - left_eye[0]
                 angle = np.degrees(np.arctan2(dy, dx))
                 # Rotate the image to align the eyes horizontally
-                M = cv2.getRotationMatrix2D(((left_eye[0] + right_eye[0]) // 2, (left_eye[1] + right_eye[1]) // 2), angle, 1)
+                M = cv2.getRotationMatrix2D((int((left_eye[0] + right_eye[0]) // 2), int((left_eye[1] + right_eye[1]) // 2)), angle, 1)
                 image = cv2.warpAffine(image, M, (self.width, self.height))
         return image
 

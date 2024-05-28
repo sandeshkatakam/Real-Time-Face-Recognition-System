@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 from face_recognition_model import FaceRecognizer
 from preprocessing import Preprocessor
-from search_embeddings import Search_Embeddings
 import mysql.connector
 import cv2
 import numpy as np  
@@ -40,8 +39,10 @@ def recognize_face():
 
     preprocessor = Preprocessor(None, 160, 160, 3)
 
-    recognizer = FaceRecognizer('src/models/weights/facenet.tflite')
-
+    script_dir = os.path.dirname(__file__) # get the directory of the current script
+    src_dir= os.path.dirname(script_dir)
+    model_path = os.path.join(script_dir, 'models/weights/facenet.tflite')
+    recognizer = FaceRecognizer(model_path)
     img = preprocessor.face_detect(img) # Detect face
     img = preprocessor.face_align(img) # Align Face
     img = preprocessor.crop_face_image(img) # Crop face image
@@ -99,7 +100,11 @@ def register_user():
     image_array = np.array(image)
     # Process the image and get the embedding
     preprocessor = Preprocessor(None, 160, 160, 3)
-    recognizer = FaceRecognizer('src/models/weights/facenet.tflite') 
+    script_dir = os.path.dirname(__file__) # get the directory of the current script
+    src_dir= os.path.dirname(script_dir)
+    model_path = os.path.join(script_dir, 'models/weights/facenet.tflite')
+    recognizer = FaceRecognizer(model_path)
+    
 
     img = preprocessor.face_detect(image_array)  # Detect face
     img = preprocessor.face_align(img)  # Align face
