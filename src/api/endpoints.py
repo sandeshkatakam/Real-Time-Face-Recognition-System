@@ -14,11 +14,11 @@ app = Flask(__name__)
 
 # Database Related configs:
 
-db_host = 'db-mysql-cluster-trimx-do-user-15662268-0.c.db.ondigitalocean.com'
-db_user = 'doadmin'
+db_host = 'db_host'
+db_user = 'db_admin'
 db_pass = 'passwd' # Enter Password here
-db_name = 'test'
-db_port = '25060'
+db_name = 'db_test'
+db_port = 'port_no'
 
 
 
